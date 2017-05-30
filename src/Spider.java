@@ -23,11 +23,8 @@ public class Spider {
         for (Element item : items) {
             sites.add(item.attr("abs:href"));
         }
-        for (String site : sites) {
-            System.out.println(site);
-        }
 
-        Item itemsInformation = leg.getItem();
+        Item itemsInformation = leg.getItem(sites.get(0));
 
         //Find current site
 
