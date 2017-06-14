@@ -16,10 +16,15 @@ public class Leg {
     public Item getItem(String site) throws IOException {
         Document doc = getNextSite(site);
         String name = doc.select("h1").text();
-        String price = doc.select(".notranslate").text();
-        StringBuilder sb = new StringBuilder(price);
-        System.out.println("name " + name);
-        System.out.println("price  " + price);
+        String priceInfo = doc.select(".notranslate").text();
+
+        //TODO: Search for integer desicribing price.
+        String priceString = priceInfo.split(" ")[1].substring(1);
+        float priceInteger = Float.parseFloat(priceString);
+
+        System.out.println("name: " + name);
+        System.out.println("price:  " + priceInteger);
+
         return new Item(name, 0, 0, 0);
     }
 
