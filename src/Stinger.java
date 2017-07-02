@@ -32,7 +32,10 @@ public class Stinger {
 
             Item itemToBuy = items.get(index);
 
-            if(itemToBuy.getPrice() > moneyLeft) canBuy = false;
+            if(itemToBuy.getPrice() > moneyLeft){
+                canBuy = false;
+                System.out.println("Can't afford more items!");
+            }
 
             if(canBuy){
                 itemsBought.add(itemToBuy);

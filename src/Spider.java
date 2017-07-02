@@ -42,6 +42,10 @@ public class Spider {
         //TODO: Send list to stinger, to make purchase.
         Stinger stinger = new Stinger(itemsToBuy, 10);
         stinger.makePurchase();
+        stinger.makePurchase();
+        stinger.makePurchase();
+        stinger.makePurchase();
+
 
 
         //Find current site
