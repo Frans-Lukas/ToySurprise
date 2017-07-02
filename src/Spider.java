@@ -11,24 +11,26 @@ import java.util.*;
 public class Spider {
     private Set<String> visitedSites = new HashSet<>();
     private List<String> sites = new ArrayList<>();
-    private ArrayList<Item> itemsToBuy = new ArrayList<>();
+    private List<Item> itemsToBuy = new ArrayList<>();
 
 
     public void crawl(String startSite) throws IOException {
         Leg leg = new Leg();
         Document currentDocument = leg.getNextSite(startSite);
         Elements items = currentDocument.getElementsByClass("vip");
+
         for (Element item : items) {
             sites.add(item.attr("abs:href"));
         }
 
 
-        System.out.println(sites.size());
+        System.out.println("number of items found: " + sites.size());
+
         int numDone = 0;
         for (String site : sites) {
             itemsToBuy.add(leg.getItem(site));
             numDone++;
-            System.out.println(numDone);
+            System.out.println("NumDone: " + numDone);
         }
 
         itemsToBuy.sort(Item.ItemComparator);
@@ -36,6 +38,11 @@ public class Spider {
         for (Item item : itemsToBuy) {
             System.out.println(item.getName());
         }
+
+        //TODO: Send list to stinger, to make purchase.
+        Stinger stinger = new Stinger(itemsToBuy, 10);
+        stinger.makePurchase();
+
 
         //Find current site
 
