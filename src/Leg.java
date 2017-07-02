@@ -17,7 +17,8 @@ public class Leg {
         Document doc = getNextSite(site);
         String name = doc.select("h1").text();
         String priceInfo = doc.select(".notranslate").text();
-        System.out.println(priceInfo);
+        String numSold = doc.select(".qtyTxt").text().split(" ")[3];
+        System.out.println("num sold: " + numSold);
         //TODO: Search for integer desicribing price.
 
         int price = findfloatInString(priceInfo);
@@ -31,7 +32,8 @@ public class Leg {
         System.out.println("name: " + name);
         System.out.println("price:  " + price + " dolla!");
 
-        return new Item(name, 0, 0, 0);
+        //String name, int price, int rating)
+        return new Item(name, price, Integer.parseInt(numSold));
     }
 
     public Integer findfloatInString(String s){
