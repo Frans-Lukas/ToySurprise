@@ -23,10 +23,19 @@ public class Spider {
         }
 
 
+        System.out.println(sites.size());
+        int numDone = 0;
         for (String site : sites) {
             itemsToBuy.add(leg.getItem(site));
+            numDone++;
+            System.out.println(numDone);
         }
+
         itemsToBuy.sort(Item.ItemComparator);
+
+        for (Item item : itemsToBuy) {
+            System.out.println(item.getName());
+        }
 
         //Find current site
 

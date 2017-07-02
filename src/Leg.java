@@ -17,9 +17,15 @@ public class Leg {
         Document doc = getNextSite(site);
         String name = doc.select("h1").text();
         String priceInfo = doc.select(".notranslate").text();
-        String numSold = doc.select(".qtyTxt").text().split(" ")[3];
-        System.out.println("num sold: " + numSold);
-        //TODO: Search for integer desicribing price.
+
+
+
+        String qtyInfo[] = doc.select(".qtyTxt").text().split(" ");
+        int numSold;
+
+        numSold = findNumSold(qtyInfo);
+
+
 
         int price = findfloatInString(priceInfo);
         if(price == 0){
@@ -29,11 +35,12 @@ public class Leg {
         name = name.split(" ", 3)[2];
 
 
+        /*System.out.println("num sold: " + numSold);
         System.out.println("name: " + name);
-        System.out.println("price:  " + price + " dolla!");
+        System.out.println("price:  " + price + " dolla!"); */
 
-        //String name, int price, int rating)
-        return new Item(name, price, Integer.parseInt(numSold));
+        //String name, int price, int rating
+        return new Item(name, price, numSold);
     }
 
     public Integer findfloatInString(String s){
@@ -54,6 +61,30 @@ public class Leg {
         }
 
         return f;
+    }
+
+    public Integer findNumSold(String words[]){
+        int numSold = 0;
+        boolean firstInt = false;
+        for (String word : words) {
+            if(isNumber(word) && !firstInt) {
+                firstInt = true;
+            } else if(isNumber(word)){
+                numSold = Integer.parseInt(word);
+            }
+        }
+        return numSold;
+    }
+    
+    public boolean isNumber(String s){
+        boolean isNumber = true;
+        for (char c : s.toCharArray()) {
+            if(!Character.isDigit(c)){
+                isNumber = false;
+                break;
+            }
+        }
+        return isNumber;
     }
 
 
