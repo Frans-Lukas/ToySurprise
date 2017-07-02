@@ -17,16 +17,43 @@ public class Leg {
         Document doc = getNextSite(site);
         String name = doc.select("h1").text();
         String priceInfo = doc.select(".notranslate").text();
-
+        System.out.println(priceInfo);
         //TODO: Search for integer desicribing price.
-        String priceString = priceInfo.split(" ")[1].substring(1);
-        float priceInteger = Float.parseFloat(priceString);
+
+        int price = findfloatInString(priceInfo);
+        if(price == 0){
+            throw new IOException("Price not found in string: " + priceInfo);
+        }
+        //Remove first two words, i.e. "Details about" string
+        name = name.split(" ", 3)[2];
+
 
         System.out.println("name: " + name);
-        System.out.println("price:  " + priceInteger);
+        System.out.println("price:  " + price + " dolla!");
 
         return new Item(name, 0, 0, 0);
     }
+
+    public Integer findfloatInString(String s){
+        int f = 0;
+        for (String word : s.split(" ")) {
+            if(word.toCharArray()[0] == '$'){
+                word = word.substring(1, word.length());
+                try{
+
+                    f = (int) Math.ceil(Float.parseFloat(word));
+
+                    break;
+                } catch(NumberFormatException e){
+
+                }
+            }
+
+        }
+
+        return f;
+    }
+
 
     public Document getNextSite(String currentSite) throws IOException {
         Connection connection = Jsoup.connect(currentSite);
