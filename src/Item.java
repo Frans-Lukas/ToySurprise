@@ -7,12 +7,13 @@ public class Item {
     private String name;
     private int price;
     private int rating;
-    private int address;
+    private String address;
 
-    public Item(String name, int price, int rating) {
+    public Item(String name, int price, int rating, String address) {
         this.name = name;
         this.price = price;
         this.rating = rating;
+        this.address = address;
     }
 
     public void setName(String name) {
@@ -27,9 +28,6 @@ public class Item {
         this.rating = rating;
     }
 
-    public void setAddress(int address) {
-        this.address = address;
-    }
 
     public String getName() {
 
@@ -44,7 +42,7 @@ public class Item {
         return rating;
     }
 
-    public int getAddress() {
+    public String getAddress() {
         return address;
     }
 

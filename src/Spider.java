@@ -14,18 +14,30 @@ public class Spider {
     private List<Item> itemsToBuy = new ArrayList<>();
 
 
-    public void crawl(String startSite) throws IOException {
+    public void crawl(String startSite, int numPages) throws IOException {
         Leg leg = new Leg();
+
+
+        //TODO: Find "next" page address and iterate numPages times
+
+
         Document currentDocument = leg.getNextSite(startSite);
-        Elements items = currentDocument.getElementsByClass("vip");
 
-        for (Element item : items) {
-            sites.add(item.attr("abs:href"));
+        for (int i = 0; i < numPages; i++) {
+
+
+            Elements items = currentDocument.getElementsByClass("vip");
+
+            for (Element item : items) {
+                sites.add(item.attr("abs:href"));
+            }
+
+            System.out.println("number of items found: " + sites.size());
+
+            currentDocument = leg.getNextSite(
+                    currentDocument.getElementsByClass("pagn-next").first().select("a").first().attr("abs:href"));
+
         }
-
-
-        System.out.println("number of items found: " + sites.size());
-
         int numDone = 0;
         for (String site : sites) {
             itemsToBuy.add(leg.getItem(site));
@@ -35,9 +47,9 @@ public class Spider {
 
         itemsToBuy.sort(Item.ItemComparator);
 
-        for (Item item : itemsToBuy) {
+        /*for (Item item : itemsToBuy) {
             System.out.println(item.getName());
-        }
+        }*/
 
         //TODO: Send list to stinger, to make purchase.
         Stinger stinger = new Stinger(itemsToBuy, 10);

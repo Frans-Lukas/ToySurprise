@@ -3,28 +3,22 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by c16fld on 2017-05-30.
  */
 public class Leg {
 
-    private List<Item> items = new ArrayList<>();
 
     public Item getItem(String site) throws IOException {
         Document doc = getNextSite(site);
         String name = doc.select("h1").text();
         String priceInfo = doc.select(".notranslate").text();
 
-
-
         String qtyInfo[] = doc.select(".qtyTxt").text().split(" ");
         int numSold;
 
         numSold = findNumSold(qtyInfo);
-
 
 
         int price = findfloatInString(priceInfo);
@@ -40,7 +34,7 @@ public class Leg {
         System.out.println("price:  " + price + " dolla!"); */
 
         //String name, int price, int rating
-        return new Item(name, price, numSold);
+        return new Item(name, price, numSold, site);
     }
 
     public Integer findfloatInString(String s){

@@ -25,6 +25,8 @@ public class Main {
                                         new Category("3252", "Travel"),
                                         new Category("172008", "Gift Cards & Coupons"),
                                         new Category("99", "Everything else")};
+
+
             System.out.println("Choose category number to search in: \n");
 
             int index = 0;
@@ -32,16 +34,21 @@ public class Main {
                 System.out.println((index + 1) + ". " + category.getCategory());
                 index++;
             }
+
             System.out.println();
             Scanner reader = new Scanner(System.in);
             index = reader.nextInt() - 1;
-            System.out.println(categories[index].getCategory() + ", " + categories[index].getCategoryNumber());
-            reader.next();
+            System.out.println();
+            //System.out.println(categories[index].getCategory() + ", " + categories[index].getCategoryNumber());
+
+            System.out.print("Choose number of pages to search: ");
+            int numPages = reader.nextInt();
+            System.out.println();
 
             crawler.crawl("http://www.ebay.com/sch/i.html?_nkw=&_in_kw=1&_ex_kw=&_sacat=" +
                     categories[index].getCategoryNumber() +
                     "&_udlo=&_udhi=&LH_BIN=1&_ftrt=901&_ftrv=1&_sabdlo=&_sabdhi=&_samilow=&_samihi=&_sadis=15" +
-                    "&_stpos=&_sargn=-1%26saslc%3D1&_salic=1&_sop=15&_dmd=1&_ipg=50");
+                    "&_stpos=&_sargn=-1%26saslc%3D1&_salic=1&_sop=15&_dmd=1&_ipg=50", numPages);
         } catch (IOException e) {
             e.printStackTrace();
         }

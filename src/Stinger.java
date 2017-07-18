@@ -48,6 +48,7 @@ public class Stinger {
         if(itemsBought.size() > 0) {
             System.out.println();
             System.out.println("Purchased item: " + itemsBought.get(itemsBought.size() - 1).getName());
+            System.out.println("Item address: " + itemsBought.get(itemsBought.size() - 1).getAddress());
             System.out.println("Money left: " + moneyLeft);
         }
     }
