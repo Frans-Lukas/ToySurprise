@@ -19,4 +19,4 @@ java Main
 
 
 ## License
-[MIT](https://github.com/Frans-Lukas/ToySurprise/blob/master/LICENSE)
+* [MIT](https://github.com/Frans-Lukas/ToySurprise/blob/master/LICENSE)
