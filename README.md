@@ -18,3 +18,5 @@ java Main
 * [JSoup](https://jsoup.org/) - Web crawler framework
 
 
+## License
+[MIT](https://github.com/Frans-Lukas/ToySurprise/blob/master/LICENSE)
